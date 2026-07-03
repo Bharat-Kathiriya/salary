@@ -292,31 +292,31 @@
         </div>
         <div class="grid">
           <label>Salary
-            <input id="salaryAmount" type="number" step="0.01" placeholder="50K">
+            <input id="salaryAmount" type="number" step="0.01" value="" >
           </label>
           <label>Total Working Day
-            <input id="workingDays" type="number" step="0.01" placeholder="22">
+            <input id="workingDays" type="number" step="0.01" value="">
           </label>
           <label>Extra Day
-            <input id="extraDays" type="number" step="0.01" placeholder="0">
+            <input id="extraDays" type="number" step="0.01" value="0">
           </label>
           <label>Leave Day
-            <input id="leaveDays" type="number" step="0.01" placeholder="0">
+            <input id="leaveDays" type="number" step="0.01" value="0">
           </label>
           <label>No Hours
-            <input id="noHours" type="number" step="0.01" placeholder="0" readonly>
+            <input id="noHours" type="number" step="0.01" value="198" readonly>
           </label>
           <label>Leave Hours
-            <input id="leaveHours" type="number" step="0.01" placeholder="0">
+            <input id="leaveHours" type="number" step="0.01" value="0">
           </label>
           <label>Tax
-            <input id="taxAmountInput" type="number" step="0.01" placeholder="0">
+            <input id="taxAmountInput" type="number" step="0.01" value="0">
           </label>
           <label>TDS
-            <input id="tdsAmount" type="number" step="0.01" placeholder="0">
+            <input id="tdsAmount" type="number" step="0.01" value="0">
           </label>
           <label>Bonus
-            <input id="bonusAmount" type="number" step="0.01" placeholder="0">
+            <input id="bonusAmount" type="number" step="0.01" value="0">
           </label>
         </div>
       </div>
@@ -349,34 +349,34 @@
         </div>
         <div class="grid">
           <label>Salary
-            <input id="annualSalary" type="number" step="0.01" placeholder="0">
+            <input id="annualSalary" type="number" step="0.01" value="1020000">
           </label>
           <label>Total Deduction
-            <input id="totalDeduction" type="number" step="0.01" placeholder="0">
+            <input id="totalDeduction" type="number" step="0.01" value="150000">
           </label>
           <label>Slab 1 Amount
-            <input id="slab1Amount" type="number" step="0.01" placeholder="0">
+            <input id="slab1Amount" type="number" step="0.01" value="250000">
           </label>
           <label>Slab 2 Rate %
-            <input id="slab2Rate" type="number" step="0.01" placeholder="0">
+            <input id="slab2Rate" type="number" step="0.01" value="5">
           </label>
           <label>Slab 3 Rate %
-            <input id="slab3Rate" type="number" step="0.01" placeholder="0">
+            <input id="slab3Rate" type="number" step="0.01" value="20">
           </label>
           <label>Slab 4 Rate %
-            <input id="slab4Rate" type="number" step="0.01" placeholder="0">
+            <input id="slab4Rate" type="number" step="0.01" value="25">
           </label>
           <label>Slab 5 Rate %
-            <input id="slab5Rate" type="number" step="0.01" placeholder="0">
+            <input id="slab5Rate" type="number" step="0.01" value="30">
           </label>
           <label>Slab 2 Tax Base
-            <input id="slab2TaxBase" type="number" step="0.01" placeholder="0">
+            <input id="slab2TaxBase" type="number" step="0.01" value="250000">
           </label>
           <label>Slab 2 Deduction
-            <input id="slab2Deduction" type="number" step="0.01" placeholder="0">
+            <input id="slab2Deduction" type="number" step="0.01" value="250000">
           </label>
           <label>After Slab 3
-            <input id="afterSlab3Manual" type="number" step="0.01" placeholder="0">
+            <input id="afterSlab3Manual" type="number" step="0.01" value="120000">
           </label>
         </div>
       </div>
@@ -451,18 +451,16 @@
       const workingDays = n("workingDays");
       const extraDays = n("extraDays");
       const leaveDays = n("leaveDays");
+      const noHours = n("noHours");
       const leaveHours = n("leaveHours");
       const tax = n("taxAmountInput");
       const tds = n("tdsAmount");
       const bonus = n("bonusAmount");
 
-      const calculatedNoHours = workingDays ? workingDays * 9 : 0;
-      document.getElementById("noHours").value = workingDays
-        ? Number.isInteger(calculatedNoHours)
-          ? String(calculatedNoHours)
-          : String(Number(calculatedNoHours.toFixed(2)))
-        : "";
-      const noHours = calculatedNoHours;
+      const calculatedNoHours = workingDays * 9;
+      document.getElementById("noHours").value = Number.isInteger(calculatedNoHours)
+        ? String(calculatedNoHours)
+        : String(Number(calculatedNoHours.toFixed(2)));
       const perDay = workingDays ? round(salary / workingDays) : 0;
       const salaryAmount = workingDays * perDay;
       const extraAmount = extraDays * perDay;
