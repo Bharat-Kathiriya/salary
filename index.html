@@ -55,36 +55,7 @@
       font-size: 14px;
     }
 
-    .tabs {
-      display: inline-flex;
-      padding: 4px;
-      background: #e6edf1;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      gap: 4px;
-    }
-
-    .tab {
-      border: 0;
-      border-radius: 6px;
-      padding: 10px 14px;
-      font-weight: 700;
-      color: var(--muted);
-      background: transparent;
-      cursor: pointer;
-    }
-
-    .tab.active {
-      background: var(--panel);
-      color: var(--brand-dark);
-      box-shadow: 0 1px 3px rgba(21, 32, 43, 0.12);
-    }
-
     .sheet {
-      display: none;
-    }
-
-    .sheet.active {
       display: grid;
       grid-template-columns: 1.25fr 0.75fr;
       gap: 18px;
@@ -195,34 +166,6 @@
       font-size: 24px;
     }
 
-    .formula-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-
-    .formula-table th,
-    .formula-table td {
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-    }
-
-    .formula-table th {
-      background: #f8fafb;
-      color: var(--muted);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0;
-    }
-
-    .formula-table td:last-child,
-    .formula-table th:last-child {
-      text-align: right;
-      font-variant-numeric: tabular-nums;
-      font-weight: 700;
-    }
-
     .note {
       padding: 12px 16px 16px;
       color: var(--muted);
@@ -234,11 +177,11 @@
 
     @media (max-width: 900px) {
       header,
-      .sheet.active {
+      .sheet {
         display: grid;
       }
 
-      .sheet.active {
+      .sheet {
         grid-template-columns: 1fr;
       }
 
@@ -257,14 +200,6 @@
         font-size: 25px;
       }
 
-      .tabs {
-        width: 100%;
-      }
-
-      .tab {
-        flex: 1;
-      }
-
       .grid {
         grid-template-columns: 1fr;
       }
@@ -278,13 +213,9 @@
         <h1>Salary Calculation</h1>
         <p class="subtitle">HTML version of the calculations from Salary.xlsx.</p>
       </div>
-      <nav class="tabs" aria-label="Calculator tabs">
-        <button class="tab active" type="button" data-tab="salary">Salary</button>
-        <button class="tab" type="button" data-tab="tax">Tax</button>
-      </nav>
     </header>
 
-    <section class="sheet active" id="salary" aria-label="Salary calculator">
+    <section class="sheet" id="salary" aria-label="Salary calculator">
       <div class="panel">
         <div class="panel-title">
           <h2>Salary Inputs</h2>
@@ -292,31 +223,31 @@
         </div>
         <div class="grid">
           <label>Salary
-            <input id="salaryAmount" type="number" step="0.01" value="" >
+            <input id="salaryAmount" type="number" step="0.01" placeholder="50K">
           </label>
           <label>Total Working Day
-            <input id="workingDays" type="number" step="0.01" value="">
+            <input id="workingDays" type="number" step="0.01" placeholder="22">
           </label>
           <label>Extra Day
-            <input id="extraDays" type="number" step="0.01" value="0">
+            <input id="extraDays" type="number" step="0.01" placeholder="0">
           </label>
           <label>Leave Day
-            <input id="leaveDays" type="number" step="0.01" value="0">
+            <input id="leaveDays" type="number" step="0.01" placeholder="0">
           </label>
           <label>No Hours
-            <input id="noHours" type="number" step="0.01" value="198" readonly>
+            <input id="noHours" type="number" step="0.01" placeholder="0" readonly>
           </label>
           <label>Leave Hours
-            <input id="leaveHours" type="number" step="0.01" value="0">
+            <input id="leaveHours" type="number" step="0.01" placeholder="0">
           </label>
           <label>Tax
-            <input id="taxAmountInput" type="number" step="0.01" value="0">
+            <input id="taxAmountInput" type="number" step="0.01" placeholder="0">
           </label>
           <label>TDS
-            <input id="tdsAmount" type="number" step="0.01" value="0">
+            <input id="tdsAmount" type="number" step="0.01" placeholder="0">
           </label>
           <label>Bonus
-            <input id="bonusAmount" type="number" step="0.01" value="0">
+            <input id="bonusAmount" type="number" step="0.01" placeholder="0">
           </label>
         </div>
       </div>
@@ -341,73 +272,6 @@
       </aside>
     </section>
 
-    <section class="sheet" id="tax" aria-label="Tax calculator">
-      <div class="panel">
-        <div class="panel-title">
-          <h2>Tax Inputs</h2>
-          <span>Matches Tex sheet formulas</span>
-        </div>
-        <div class="grid">
-          <label>Salary
-            <input id="annualSalary" type="number" step="0.01" value="1020000">
-          </label>
-          <label>Total Deduction
-            <input id="totalDeduction" type="number" step="0.01" value="150000">
-          </label>
-          <label>Slab 1 Amount
-            <input id="slab1Amount" type="number" step="0.01" value="250000">
-          </label>
-          <label>Slab 2 Rate %
-            <input id="slab2Rate" type="number" step="0.01" value="5">
-          </label>
-          <label>Slab 3 Rate %
-            <input id="slab3Rate" type="number" step="0.01" value="20">
-          </label>
-          <label>Slab 4 Rate %
-            <input id="slab4Rate" type="number" step="0.01" value="25">
-          </label>
-          <label>Slab 5 Rate %
-            <input id="slab5Rate" type="number" step="0.01" value="30">
-          </label>
-          <label>Slab 2 Tax Base
-            <input id="slab2TaxBase" type="number" step="0.01" value="250000">
-          </label>
-          <label>Slab 2 Deduction
-            <input id="slab2Deduction" type="number" step="0.01" value="250000">
-          </label>
-          <label>After Slab 3
-            <input id="afterSlab3Manual" type="number" step="0.01" value="120000">
-          </label>
-        </div>
-      </div>
-
-      <aside class="panel">
-        <div class="panel-title">
-          <h2>Tax Results</h2>
-          <span>Live totals</span>
-        </div>
-        <table class="formula-table">
-          <thead>
-            <tr>
-              <th>Calculation</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Taxable amount</td><td id="taxableAmount"></td></tr>
-            <tr><td>After Slab 1</td><td id="afterSlab1"></td></tr>
-            <tr><td>After Slab 2</td><td id="afterSlab2"></td></tr>
-            <tr><td>Slab 2 Tax</td><td id="slab2Tax"></td></tr>
-            <tr><td>Slab 3 Tax</td><td id="slab3Tax"></td></tr>
-            <tr><td>Slab 4 Tax</td><td id="slab4Tax"></td></tr>
-            <tr><td>Total Tax</td><td id="totalTax"></td></tr>
-            <tr><td>Health and Education 4%</td><td id="educationTax"></td></tr>
-            <tr><td>Final Tax</td><td id="finalTax"></td></tr>
-          </tbody>
-        </table>
-        <div class="note">These formulas intentionally follow the workbook cell logic, including the direct slab arithmetic used in the Excel file.</div>
-      </aside>
-    </section>
   </main>
 
   <script>
@@ -421,16 +285,6 @@
       "taxAmountInput",
       "tdsAmount",
       "bonusAmount",
-      "annualSalary",
-      "totalDeduction",
-      "slab1Amount",
-      "slab2Rate",
-      "slab3Rate",
-      "slab4Rate",
-      "slab5Rate",
-      "slab2TaxBase",
-      "slab2Deduction",
-      "afterSlab3Manual",
     ];
 
     const n = (id) => Number(document.getElementById(id).value) || 0;
@@ -451,16 +305,18 @@
       const workingDays = n("workingDays");
       const extraDays = n("extraDays");
       const leaveDays = n("leaveDays");
-      const noHours = n("noHours");
       const leaveHours = n("leaveHours");
       const tax = n("taxAmountInput");
       const tds = n("tdsAmount");
       const bonus = n("bonusAmount");
 
-      const calculatedNoHours = workingDays * 9;
-      document.getElementById("noHours").value = Number.isInteger(calculatedNoHours)
-        ? String(calculatedNoHours)
-        : String(Number(calculatedNoHours.toFixed(2)));
+      const calculatedNoHours = workingDays ? workingDays * 9 : 0;
+      document.getElementById("noHours").value = workingDays
+        ? Number.isInteger(calculatedNoHours)
+          ? String(calculatedNoHours)
+          : String(Number(calculatedNoHours.toFixed(2)))
+        : "";
+      const noHours = calculatedNoHours;
       const perDay = workingDays ? round(salary / workingDays) : 0;
       const salaryAmount = workingDays * perDay;
       const extraAmount = extraDays * perDay;
@@ -484,55 +340,13 @@
       set("finalSalary", finalSalary);
     }
 
-    function calculateTax() {
-      const salary = n("annualSalary");
-      const deduction = n("totalDeduction");
-      const slab1Amount = n("slab1Amount");
-      const slab2Rate = n("slab2Rate");
-      const slab3Rate = n("slab3Rate");
-      const slab4Rate = n("slab4Rate");
-      const slab2TaxBase = n("slab2TaxBase");
-      const slab2Deduction = n("slab2Deduction");
-      const afterSlab3Manual = n("afterSlab3Manual");
-
-      const taxable = salary - deduction;
-      const afterSlab1 = taxable - slab1Amount;
-      const afterSlab2 = afterSlab1 - slab2Deduction;
-      const slab2Tax = (slab2Rate * slab2TaxBase) / 100;
-      const slab3Tax = (afterSlab2 * slab3Rate) / 100;
-      const slab4Tax = (afterSlab3Manual * slab4Rate) / 100;
-      const totalTax = slab2Tax + slab3Tax + slab4Tax;
-      const educationTax = (totalTax * 4) / 100;
-      const finalTax = totalTax + educationTax;
-
-      set("taxableAmount", taxable);
-      set("afterSlab1", afterSlab1);
-      set("afterSlab2", afterSlab2);
-      set("slab2Tax", slab2Tax);
-      set("slab3Tax", slab3Tax);
-      set("slab4Tax", slab4Tax);
-      set("totalTax", totalTax);
-      set("educationTax", educationTax);
-      set("finalTax", finalTax);
-    }
-
     function recalculate() {
       calculateSalary();
-      calculateTax();
     }
 
     for (const id of fields) {
       document.getElementById(id).addEventListener("input", recalculate);
     }
-
-    document.querySelectorAll(".tab").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach((tab) => tab.classList.remove("active"));
-        document.querySelectorAll(".sheet").forEach((sheet) => sheet.classList.remove("active"));
-        button.classList.add("active");
-        document.getElementById(button.dataset.tab).classList.add("active");
-      });
-    });
 
     recalculate();
   </script>
